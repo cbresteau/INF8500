@@ -1,28 +1,26 @@
-//======================================================================================= 
+//=======================================================================================
 // TITLE : Transactor for ALU test cases
-// DESCRIPTION : 
-// 
+// DESCRIPTION :
+//
 // Creates test cases for an ALU
 //
 // FILE : Generator.sv
-//======================================================================================= 
-// CREATION 
-// DATE AUTHOR PROJECT REVISION 
-// 2015/07/28 Etienne Gauthier 
-//======================================================================================= 
-// MODIFICATION HISTORY 
-// DATE AUTHOR PROJECT REVISION COMMENTS 
+//=======================================================================================
+// CREATION
+// DATE AUTHOR PROJECT REVISION
+// 2015/07/28 Etienne Gauthier
+//=======================================================================================
+// MODIFICATION HISTORY
+// DATE AUTHOR PROJECT REVISION COMMENTS
 // 2018/01/21 Etienne Gauthier Ajout du format de la classe générateur
-//======================================================================================= 
+//=======================================================================================
 package pkg_alu_generator;
 
 import pkg_testbench_defs::*;
 
 class Generator;
 	string  		name;		// unique identifier
-	
-	// ### À compléter ###
-		
+
 	extern function new(string name = "Generator");
 	extern task 	start();
 endclass
@@ -35,10 +33,10 @@ endfunction
 
 task Generator::start();
 
-
 	$display(" Random Generation Started");
-	
-	// ### À compléter ###
+
+	testpckt = new("TestPacket");
+	TestPacketQueue nom = new(); 
 
 endtask
 

@@ -14,7 +14,7 @@ vlog Sharp_LR35902_alu.v
 
 # Compilation du banc de test
 # La commande -mfcu indique au compilateur de traiter tout les fichier dans une même unité de compilation.
-vlog -sv -mfcu aluTOP.sv TestBenchDefs.sv Interface_to_alu.sv Driver.sv TestProgram.sv TestBenchTOP.sv
+vlog -sv -mfcu aluTOP.sv TestBenchDefs.sv Interface_to_alu.sv Driver.sv TestProgram.sv TestBenchTOP.sv Receiver.sv Generator.sv 
 
 # Afficher les vue de debuggage
 quietly view *

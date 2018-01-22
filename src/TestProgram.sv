@@ -1,25 +1,25 @@
-//======================================================================================= 
-// TITLE : 
-// DESCRIPTION : 
+//=======================================================================================
+// TITLE :
+// DESCRIPTION :
 //
 // FILE : TestProgram.sv
-//======================================================================================= 
-// CREATION 
-// DATE AUTHOR PROJECT REVISION 
+//=======================================================================================
+// CREATION
+// DATE AUTHOR PROJECT REVISION
 // 2015/07/27 Etienne Gauthier INF8500 Laboratoire 1 Automne 2015
-//======================================================================================= 
-// MODIFICATION HISTORY 
-// DATE AUTHOR PROJECT REVISION COMMENTS 
-//======================================================================================= 
+//=======================================================================================
+// MODIFICATION HISTORY
+// DATE AUTHOR PROJECT REVISION COMMENTS
+//=======================================================================================
 import pkg_testbench_defs::*;
 import pkg_alu_driver::*;
 
 program automatic TestProgram(Interface_to_alu alu_interface);
-	
+
 	// Déclaration des diver modules du testbench ici
 	// Module generator
-	// Module scoreboard 
-	// Module Receiver 
+	// Module scoreboard
+	// Module Receiver
 	Driver     	drvr;		//  Module driver
 
 
@@ -34,7 +34,7 @@ program automatic TestProgram(Interface_to_alu alu_interface);
 		$display ($time, "[START] Test starts.");
 
 		fork : test
-      			drvr.start(); 
+      			drvr.start();
 		join_any;
 		disable test;
 
@@ -42,6 +42,6 @@ program automatic TestProgram(Interface_to_alu alu_interface);
 
 		$finish;
 	end
-		
+
 
 endprogram

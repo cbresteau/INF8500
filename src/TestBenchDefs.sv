@@ -1,18 +1,18 @@
-//======================================================================================= 
+//=======================================================================================
 // TITLE : TestBench parameters
-// DESCRIPTION : 
+// DESCRIPTION :
 // Specify global parameters for the testbench
 //
 // FILE : TestBenchDefs.sv
-//======================================================================================= 
-// CREATION 
-// DATE AUTHOR PROJECT REVISION 
+//=======================================================================================
+// CREATION
+// DATE AUTHOR PROJECT REVISION
 // 2015/07/27 Etienne Gauthier INF8500 Laboratoire 1 Automne 2015
-//======================================================================================= 
-// MODIFICATION HISTORY 
-// DATE AUTHOR PROJECT REVISION COMMENTS 
+//=======================================================================================
+// MODIFICATION HISTORY
+// DATE AUTHOR PROJECT REVISION COMMENTS
 // 2018/01/21 Etienne Gauthier Ajout des déclarations pour l'encapsulation des cas de test
-//======================================================================================= 
+//=======================================================================================
 `include "Sharp_LR35902_alu_opcodes.v"
 package pkg_testbench_defs;
 
@@ -27,8 +27,8 @@ package pkg_testbench_defs;
 
 		case(op)
 			op_add:	enum_to_op = `OP_ADD;
-			op_add_c: enum_to_op = `OP_ADDC;	
-			op_sub: enum_to_op = `OP_SUB;	
+			op_add_c: enum_to_op = `OP_ADDC;
+			op_sub: enum_to_op = `OP_SUB;
 			op_sub_c: enum_to_op = `OP_SUBC;
 			op_and: enum_to_op = `OP_AND;
 			op_xor: enum_to_op = `OP_XOR;
@@ -51,9 +51,25 @@ package pkg_testbench_defs;
 	// ## À Compléter. Les class pour l'encapsulation des cas de test
 	class TestPacket;
 		string 					name;
+		reg [7 : 0]					op;
+		reg [DATA_SIZE-1 : 0] 		operand_a;
+		reg [DATA_SIZE-1 : 0] 		operand_b;
+		reg 						flag_carry;
+		reg							flag_zero;
+		reg							flag_neg;
+		reg 						flag_aux_carry;
 
 		function new(string name = "TestPacket");
+			/AluOperation op = op_add;
 			this.name = name;
+			this.op = enum_to_op(op);
+			this.operand_a =  $urandom_range(255,0);
+			this.operand_b = $urandom_range(255,0);
+
+			this.flag_carry =  $urandom_range(1,0);
+			this.flag_zero = $urandom_range(1,0);
+			this.flag_neg =  $urandom_range(1,0);
+			this.flag_aux_carry = $urandom_range(1,0);
 		endfunction
 	endclass
 
@@ -67,7 +83,7 @@ package pkg_testbench_defs;
 
 	// Utilisation de mailbox afin de faire voyager les packet de module en module
 	//typedef mailbox #(ResultPacket) TestResultQueue;
-	//typedef mailbox #(TestPacket) TestPacketQueue;
-	
+	typedef mailbox #(TestPacket) TestPacketQueue;
+
 
 endpackage : pkg_testbench_defs
