@@ -21,6 +21,8 @@ import pkg_testbench_defs::*;
 class Generator;
 	string  		name;		// unique identifier
 
+	// ### À compléter ###
+
 	extern function new(string name = "Generator");
 	extern task 	start();
 endclass
@@ -33,10 +35,12 @@ endfunction
 
 task Generator::start();
 
+
 	$display(" Random Generation Started");
 
-	testpckt = new("TestPacket");
-	TestPacketQueue nom = new(); 
+	pcket_gen = new("TestPacket")
+	TestPacketQueue gen_mail = new()
+
 
 endtask
 

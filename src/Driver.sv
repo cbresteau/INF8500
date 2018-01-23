@@ -63,7 +63,9 @@ task Driver::start();
 	$display ($time, " [DRIVER] Task Started");
 	forever begin
 
-			if(DEBUG_ENABLE) begin
+		AluOperation op = op_add;
+		
+		if(DEBUG_ENABLE) begin
 			$display ($time, " [DRIVER] Sending OP: %s, OPERA: %b, OPERB: %b, CARRY: %b, ZERO: %b, NEG: %b, AUXCARRY: %b",
 				op.name(), this.operand_a, this.operand_b, this.flag_carry, this.flag_zero, this.flag_neg, this.flag_aux_carry);
 		end

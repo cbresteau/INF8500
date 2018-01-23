@@ -51,6 +51,7 @@ package pkg_testbench_defs;
 	// ## À Compléter. Les class pour l'encapsulation des cas de test
 	class TestPacket;
 		string 					name;
+
 		reg [7 : 0]					op;
 		reg [DATA_SIZE-1 : 0] 		operand_a;
 		reg [DATA_SIZE-1 : 0] 		operand_b;
@@ -60,7 +61,7 @@ package pkg_testbench_defs;
 		reg 						flag_aux_carry;
 
 		function new(string name = "TestPacket");
-			/AluOperation op = op_add;
+
 			this.name = name;
 			this.op = enum_to_op(op);
 			this.operand_a =  $urandom_range(255,0);
@@ -70,6 +71,7 @@ package pkg_testbench_defs;
 			this.flag_zero = $urandom_range(1,0);
 			this.flag_neg =  $urandom_range(1,0);
 			this.flag_aux_carry = $urandom_range(1,0);
+
 		endfunction
 	endclass
 

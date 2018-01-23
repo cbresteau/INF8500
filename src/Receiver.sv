@@ -25,7 +25,7 @@ class Receiver;
 			// unique identifier
 			string   				name;
 
-		// ### A compléter ##""
+			// ### À compléter ###
 
    	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface);
    	extern task 	start();
@@ -44,10 +44,10 @@ task Receiver::start();
 
 	$display($time, " [RECEIVER] Task Started");
 
-			// Wait for signal to propagate
-		alu_interface.wait_clk(1);
-			// Read result
-		alu_interface.read_op_result(result, out_flag_carry, out_flag_zero, out_flag_neg, out_flag_aux_carry);
+	alu_interface.wait_clk(1);
+
+		// Read result
+	alu_interface.read_op_result(result, out_flag_carry, out_flag_zero, out_flag_neg, out_flag_aux_carry);
 
 	$display ($time, " [RECEIVER] Task finished");
 endtask
