@@ -27,6 +27,7 @@ class Driver;
  			string    			name;			// unique identifier
 
 			// TODO: Generator mailbox
+
 			//TestPacketQueue in_box;
 
 			reg [7 : 0]					op;
@@ -38,14 +39,15 @@ class Driver;
 			reg 						flag_aux_carry;
 
 
-	extern function new(string name = "Driver", virtual Interface_to_alu alu_interface);
+	extern function new(string name = "Driver", virtual Interface_to_alu alu_interface, TestPacketQueue in_box ); //Mod ICI
   	extern task 	start();
 
 endclass
 
-function Driver::new(string name = "Driver",  virtual Interface_to_alu alu_interface);
+function Driver::new(string name = "Driver",  virtual Interface_to_alu alu_interface, TestPacketQueue in_box );
 	this.name = name;
 	this.alu_interface = alu_interface;
+	this.in_box = in_box;
 endfunction
 
 
@@ -64,7 +66,7 @@ task Driver::start();
 	forever begin
 
 		AluOperation op = op_add;
-		
+
 		if(DEBUG_ENABLE) begin
 			$display ($time, " [DRIVER] Sending OP: %s, OPERA: %b, OPERB: %b, CARRY: %b, ZERO: %b, NEG: %b, AUXCARRY: %b",
 				op.name(), this.operand_a, this.operand_b, this.flag_carry, this.flag_zero, this.flag_neg, this.flag_aux_carry);
