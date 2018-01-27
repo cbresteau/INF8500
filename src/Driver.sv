@@ -28,7 +28,8 @@ class Driver;
 
 			// TODO: Generator mailbox
 
-			//TestPacketQueue in_box;
+			TestPacketQueue in_box; //Mod ici
+			TestPacketQueue out_box;
 
 			reg [7 : 0]					op;
 			reg [DATA_SIZE-1 : 0] 		operand_a;
@@ -48,6 +49,7 @@ function Driver::new(string name = "Driver",  virtual Interface_to_alu alu_inter
 	this.name = name;
 	this.alu_interface = alu_interface;
 	this.in_box = in_box;
+	this.out_box = new(); // Mod ici
 endfunction
 
 
@@ -74,7 +76,8 @@ task Driver::start();
 
 		// Send payload
 		alu_interface.send_op(this.op, this.operand_a, this.operand_b, this.flag_carry, this.flag_zero, this.flag_neg, this.flag_aux_carry);
-
+		// Envoie mailbox
+		// Envoyer au Scoreboard out_box (fonction ou paramètres pour le constructeur ??)
 		packets_sent++;
 
 		// Wait for signal to propagate

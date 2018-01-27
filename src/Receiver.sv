@@ -25,7 +25,7 @@ class Receiver;
 			// unique identifier
 			string   				name;
 
-			// ### À compléter ###
+			TestPacketQueue out_box; // Mod ici 
 
    	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface);
    	extern task 	start();
@@ -35,6 +35,7 @@ endclass
 function Receiver::new(string name = "Receiver", virtual Interface_to_alu alu_interface);
 	this.name = name;
 	this.alu_interface = alu_interface;
+	this.out_box = new(); // Mod ici
 
 	// ### À compléter ###
 
@@ -48,7 +49,7 @@ task Receiver::start();
 
 		// Read result
 	alu_interface.read_op_result(result, out_flag_carry, out_flag_zero, out_flag_neg, out_flag_aux_carry);
-
+	// MOD ICI same as driver
 	$display ($time, " [RECEIVER] Task finished");
 endtask
 
