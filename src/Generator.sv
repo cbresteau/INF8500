@@ -20,16 +20,16 @@ import pkg_testbench_defs::*;
 
 class Generator;
 	string  		name;		// unique identifier
-
+ TestPacketQueue	out_mail;
 	// ### À compléter ###
 
-	extern function new(string name = "Generator");
+	extern function new(string name = "Generator", TestPacketQueue out_mail);
 	extern task 	start();
 endclass
 
-function Generator::new(string name = "Generator");
+function Generator::new(string name = "Generator", TestPacketQueue out_mail);
 	this.name = name;
-	// ### À compléter ###
+	this.out_mail = out_mail;
 endfunction
 
 
@@ -37,9 +37,6 @@ task Generator::start();
 
 
 	$display(" Random Generation Started");
-
-	pcket_gen = new("TestPacket")
-	TestPacketQueue gen_mail = new()
 
 
 endtask

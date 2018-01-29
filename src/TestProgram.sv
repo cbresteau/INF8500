@@ -20,8 +20,14 @@ program automatic TestProgram(Interface_to_alu alu_interface);
 	// Module generator
 	// Module scoreboard
 	// Module Receiver
+	mailbox #(TestPacket) mail1 = new();
+	mailbox #(TestPacket) mail2 = new();
+	mailbox #(ResultPacket) mail3 = new();
 	Driver     	drvr;		//  Module driver
-	TestPacketQueue in_box; //Mod ici
+	Receiver rcrv;
+	Generator gen;
+	Scoreboard board;
+
 
 	initial begin
 
@@ -29,8 +35,11 @@ program automatic TestProgram(Interface_to_alu alu_interface);
       	// Generator
       	// Receiver
       	// Scoreboard
-			in_box = new(); // Mod ici 
-  		drvr = new("drvr[0]", alu_interface, in_box); // MOD ici
+
+  		drvr = new("drvr[0]", alu_interface, mail1, mail2); // MOD ici
+			rcvr = new("rcrv[0]" , alu_interface, mail3);
+			gen = new("gen[0]", mail1);
+			board = new("board[0]", alu_interface, mail2, mail3); 
 
 		$display ($time, "[START] Test starts.");
 

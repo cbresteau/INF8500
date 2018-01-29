@@ -48,7 +48,7 @@ task Scoreboard::start();
 endtask
 
 
-task Scoreboard::goldenModel(mail_driver);
+task Scoreboard::goldenModel();
 
 	$display(" Création du GoldenModel ")
 	reg [7:0]   			test_op;
@@ -146,6 +146,7 @@ task Scoreboard::goldenModel(mail_driver);
 		};
 		op_scf:{test_op = ~mail_driver.operand_a;
 			mail_driver.flag_carry = 1;
+			// Sortie pas importante seul le carry_flag importe
 		};
 	endcase
 

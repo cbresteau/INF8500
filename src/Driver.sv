@@ -40,16 +40,16 @@ class Driver;
 			reg 						flag_aux_carry;
 
 
-	extern function new(string name = "Driver", virtual Interface_to_alu alu_interface, TestPacketQueue in_box ); //Mod ICI
+	extern function new(string name = "Driver", virtual Interface_to_alu alu_interface, TestPacketQueue in_box , TestPacketQueue out_box); //Mod ICI
   	extern task 	start();
 
 endclass
 
-function Driver::new(string name = "Driver",  virtual Interface_to_alu alu_interface, TestPacketQueue in_box );
+function Driver::new(string name = "Driver",  virtual Interface_to_alu alu_interface, TestPacketQueue in_box, TestPacketQueue out_box );
 	this.name = name;
 	this.alu_interface = alu_interface;
 	this.in_box = in_box;
-	this.out_box = new(); // Mod ici
+	this.out_box = out_box; // Mod ici
 endfunction
 
 
