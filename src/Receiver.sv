@@ -25,17 +25,17 @@ class Receiver;
 			// unique identifier
 			string   				name;
 
-			TestResultQueue out_box; // Mod ici
+			TestResultQueue result_mailbox
 
-   	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface);
+   	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue result_mailbox);
    	extern task 	start();
 
 endclass
 
-function Receiver::new(string name = "Receiver", virtual Interface_to_alu alu_interface, result_mailbox);
+function Receiver::new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue result_mailbox);
 	this.name = name;
 	this.alu_interface = alu_interface;
-	this.out_box = result_mailbox ; // Mod ici
+	this.result_mailbox = result_mailbox ; // Mod ici
 
 	// ### À compléter ###
 

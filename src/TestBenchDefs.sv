@@ -91,7 +91,7 @@ package pkg_testbench_defs;
 	endclass
 
 	// Utilisation de mailbox afin de faire voyager les packet de module en module
-	//typedef mailbox #(ResultPacket) TestResultQueue;
+	typedef mailbox #(ResultPacket) TestResultQueue;
 	typedef mailbox #(TestPacket) TestPacketQueue;
 
 
