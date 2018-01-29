@@ -54,98 +54,98 @@ task Scoreboard::goldenModel(mail_driver);
 	reg [7:0]   			test_op;
 	// Récupère les opérations telles quelles de l'UAL ou non ?? exemple pour ADD ??
 	case(op)
-		op_add: test_op = TestPacketQueue.operand_a + TestPacketQueue.operand_b;
-		op_add_c: if (TestPacketQueue.flag_carry){
-								test_op = TestPacketQueue.operand_a + TestPacketQueue.operand_b;
+		op_add: test_op = mail_driver.operand_a + mail_driver.operand_b;
+		op_add_c: if (mail_driver.flag_carry){
+								test_op = mail_driver.operand_a + mail_driver.operand_b;
 						 }
 							else{
 								 test_op = 0;
 							 };
-		op_sub: test_op = TestPacketQueue.operand_a - TestPacketQueue.operand_b;
-		op_sub_c: if (TestPacketQueue.flag_carry){
-								test_op = TestPacketQueue.operand_a - TestPacketQueue.operand_b;
+		op_sub: test_op = mail_driver.operand_a - mail_driver.operand_b;
+		op_sub_c: if (mail_driver.flag_carry){
+								test_op = mail_driver.operand_a - mail_driver.operand_b;
 						 }
 							else{
 								 test_op = 0;
 							 };
-		op_and: {test_op = TestPacketQueue.operand_a & TestPacketQueue.operand_b;
-						 TestPacketQueue.flag_carry = 0;
-						 TestPacketQueue.flag_neg = 0;
-						 TestPacketQueue.flag_aux_carry = 1;
+		op_and: {test_op = mail_driver.operand_a & mail_driver.operand_b;
+						 mail_driver.flag_carry = 0;
+						 mail_driver.flag_neg = 0;
+						 mail_driver.flag_aux_carry = 1;
 					 };
-		op_xor: {test_op = TestPacketQueue.operand_a ^ TestPacketQueue.operand_b;
-						 TestPacketQueue.flag_carry = 0;
-						 TestPacketQueue.flag_neg = 0;
-						 TestPacketQueue.flag_aux_carry = 0;
+		op_xor: {test_op = mail_driver.operand_a ^ mail_driver.operand_b;
+						 mail_driver.flag_carry = 0;
+						 mail_driver.flag_neg = 0;
+						 mail_driver.flag_aux_carry = 0;
 					 };
-		op_or: {test_op = TestPacketQueue.operand_a | TestPacketQueue.operand_b;
-						 TestPacketQueue.flag_carry = 0;
-						 TestPacketQueue.flag_neg = 0;
-						 TestPacketQueue.flag_aux_carry = 0;
+		op_or: {test_op = mail_driver.operand_a | mail_driver.operand_b;
+						 mail_driver.flag_carry = 0;
+						 mail_driver.flag_neg = 0;
+						 mail_driver.flag_aux_carry = 0;
 					 };
-		op_cp: { test_op =  TestPacketQueue.operand_a - TestPacketQueue.operand_b
+		op_cp: { test_op =  mail_driver.operand_a - mail_driver.operand_b
 			if(tes_op == 0){
-				TestPacketQueue.flag_zero = 1;
+				mail_driver.flag_zero = 1;
 			}
 			else if ( test_op < 0 ){
-				TestPacketQueue.flag_neg = 1;
+				mail_driver.flag_neg = 1;
 			}
 		};
-		op_inc: test_op = TestPacketQueue.operand_b + 1;
-		op_dec: test_op = TestPacketQueue.operand_b - 1;
-		op_daa: test_op = {if(TestPacketQueue.flag_aux_carry == 1 || TestPacketQueue.operand_a[3:0] > 9){
-			TestPacketQueue.flag_carry = 1;
-			TestPacketQueue.operand_a[3:0] = TestPacketQueue.operand_a[3:0] + 6;
-			TestPacketQueue.operand_a[7:4] = TestPacketQueue.operand_a[7:4] + 1;
+		op_inc: test_op = mail_driver.operand_b + 1;
+		op_dec: test_op = mail_driver.operand_b - 1;
+		op_daa: test_op = {if(mail_driver.flag_aux_carry == 1 || mail_driver.operand_a[3:0] > 9){
+			mail_driver.flag_carry = 1;
+			mail_driver.operand_a[3:0] = mail_driver.operand_a[3:0] + 6;
+			mail_driver.operand_a[7:4] = mail_driver.operand_a[7:4] + 1;
 			}
-			if(TestPacketQueue.flag_carry == 1 || TestPacketQueue.operand_a[7:4] > 9){
-				TestPacketQueue.operand_a[7:4] = TestPacketQueue.operand_a[7:4] + 6;
+			if(mail_driver.flag_carry == 1 || mail_driver.operand_a[7:4] > 9){
+				mail_driver.operand_a[7:4] = mail_driver.operand_a[7:4] + 6;
 			}
-			TestPacketQueue.flag_aux_carry = 0;
+			mail_driver.flag_aux_carry = 0;
 		};
 		op_rlca: {
-			TestPacketQueue.flag_carry = TestPacketQueue.operand_a[7];
-			test_op = TestPacketQueue.operand_a <<< 1;
+			mail_driver.flag_carry = mail_driver.operand_a[7];
+			test_op = mail_driver.operand_a <<< 1;
 		};
 		op_rrca: {
-			TestPacketQueue.flag_carry = TestPacketQueue.operand_a[0];
-			test_op = TestPacketQueue.operand_a >>> 1;
+			mail_driver.flag_carry = mail_driver.operand_a[0];
+			test_op = mail_driver.operand_a >>> 1;
 		};
 		op_rla: {
-			if(TestPacketQueue.operand_a[7] == 0){
-			TestPacketQueue.operand_a <<< 1;
-			TestPacketQueue.operand_a[0] = TestResultQueue.flag_carry;
-			TestPacketQueue.flag_carry = 0 ;
+			if(mail_driver.operand_a[7] == 0){
+			mail_driver.operand_a <<< 1;
+			mail_driver.operand_a[0] = TestResultQueue.flag_carry;
+			mail_driver.flag_carry = 0 ;
 		}
 		else{
-			TestPacketQueue.operand_a <<< 1;
-			TestPacketQueue.operand_a[0] = TestResultQueue.flag_carry;
-			TestPacketQueue.flag_carry = 1 ;
+			mail_driver.operand_a <<< 1;
+			mail_driver.operand_a[0] = TestResultQueue.flag_carry;
+			mail_driver.flag_carry = 1 ;
 		}
-		test_op = TestPacketQueue.operand_a;
+		test_op = mail_driver.operand_a;
 		};
 		op_rra: {
-			if(TestPacketQueue.operand_a[0] == 0){
-			TestPacketQueue.operand_a >>> 1;
-			TestPacketQueue.operand_a[7] = TestResultQueue.flag_carry;
-			TestPacketQueue.flag_carry = 0 ;
+			if(mail_driver.operand_a[0] == 0){
+			mail_driver.operand_a >>> 1;
+			mail_driver.operand_a[7] = TestResultQueue.flag_carry;
+			mail_driver.flag_carry = 0 ;
 		}
 		else{
-			TestPacketQueue.operand_a >>> 1;
-			TestPacketQueue.operand_a[7] = TestResultQueue.flag_carry;
-			TestPacketQueue.flag_carry = 1 ;
+			mail_driver.operand_a >>> 1;
+			mail_driver.operand_a[7] = TestResultQueue.flag_carry;
+			mail_driver.flag_carry = 1 ;
 		}
-		test_op = TestPacketQueue.operand_a;
+		test_op = mail_driver.operand_a;
 		};
 		op_cpl: {
-			test_op = ~TestPacketQueue.operand_a;
+			test_op = ~mail_driver.operand_a;
 			// Erreur énoncé dans le carry flag qui reste id.
 		};
-		op_ccf: {test_op = ~TestPacketQueue.flag_carry;
-			TestPacketQueue.flag_carry = ~TestPacketQueue.flag_carry;
+		op_ccf: {test_op = ~mail_driver.flag_carry;
+			mail_driver.flag_carry = ~mail_driver.flag_carry;
 		};
-		op_scf:{test_op = ~TestPacketQueue.operand_a;
-			TestPacketQueue.flag_carry = 1;
+		op_scf:{test_op = ~mail_driver.operand_a;
+			mail_driver.flag_carry = 1;
 		};
 	endcase
 
