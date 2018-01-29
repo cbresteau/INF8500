@@ -1,20 +1,20 @@
-//======================================================================================= 
+//=======================================================================================
 // TITLE : Sharp LR35902 ALU
-// DESCRIPTION : 
+// DESCRIPTION :
 //  Behavioural description of the Sharp LR35902 ALU
 //
 //  DATA_SIZE: operands size (default 8bits)
 //
 //
 // FILE : alu.v
-//======================================================================================= 
-// CREATION 
-// DATE AUTHOR PROJECT REVISION 
+//=======================================================================================
+// CREATION
+// DATE AUTHOR PROJECT REVISION
 // 2015/06/22 Etienne Gauthier INF8500 Laboratoire 1 Automne 2015
-//======================================================================================= 
-// MODIFICATION HISTORY 
-// DATE AUTHOR PROJECT REVISION COMMENTS 
-//======================================================================================= 
+//=======================================================================================
+// MODIFICATION HISTORY
+// DATE AUTHOR PROJECT REVISION COMMENTS
+//=======================================================================================
 `include "Sharp_LR35902_alu_opcodes.v"
 
 module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
@@ -53,9 +53,9 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 
 	// Control Path (Flag register process)
 	always @ ( in_op, w_carry, w_aux_carry, out_result, in_oper_a, in_oper_b, in_flag_carry) begin : flags_process
-		
+
 		casex (in_op)
-			`OP_ADD: begin // ADD (A+B)						
+			`OP_ADD: begin // ADD (A+B)
 				out_flag_carry <= w_carry;
 				out_flag_aux_carry <= w_aux_carry;
 				out_flag_neg <= 1'b0;
@@ -99,9 +99,9 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 					out_flag_zero <= 1'b0;
 				end
 			end
-			`OP_AND: begin // AND					
-				out_flag_carry <= 1'b0; 
-				out_flag_aux_carry <= 1'b1; 
+			`OP_AND: begin // AND
+				out_flag_carry <= 1'b0;
+				out_flag_aux_carry <= 1'b1;
 				out_flag_neg <= 1'b0;
 				if(out_result == 0 ) begin
 					out_flag_zero <= 1'b1;
@@ -111,8 +111,8 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 				end
 			end
 			`OP_XOR: begin // XOR
-				out_flag_carry <= 1'b0; 
-				out_flag_aux_carry <= 1'b0; 
+				out_flag_carry <= 1'b0;
+				out_flag_aux_carry <= 1'b0;
 				out_flag_neg <= 1'b0;
 				if(out_result == 0 ) begin
 					out_flag_zero <= 1'b1;
@@ -122,8 +122,8 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 				end
 			end
 			`OP_OR: begin // OR
-				out_flag_carry <= 1'b0; 
-				out_flag_aux_carry <= 1'b0; 
+				out_flag_carry <= 1'b0;
+				out_flag_aux_carry <= 1'b0;
 				out_flag_neg <= 1'b0;
 				if(out_result == 0 ) begin
 					out_flag_zero <= 1'b1;
@@ -132,14 +132,14 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 					out_flag_zero <= 1'b0;
 				end
 			end
-			`OP_CP: begin // CP compare (A) 
+			`OP_CP: begin // CP compare (A)
 				if (in_oper_a < in_oper_b) begin
 					out_flag_carry <= 1'b1;
 				end
 				else begin
 					out_flag_carry <= 1'b0;
 				end
-				out_flag_aux_carry <= w_aux_carry; 
+				out_flag_aux_carry <= w_aux_carry;
 				out_flag_neg <= 1'b1;
 				if (in_oper_a == in_oper_b) begin
 					out_flag_zero <= 1'b1;
@@ -149,7 +149,7 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 				end
 			end
 
-			`OP_INC: begin // INR (B) 
+			`OP_INC: begin // INR (B)
 				out_flag_neg <= 1'b0;
 				out_flag_carry <= in_flag_carry;
 				out_flag_aux_carry <= w_aux_carry;
@@ -160,7 +160,7 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 					out_flag_zero <= 1'b0;
 				end
 			end
-			`OP_DEC: begin // DCR (B) 
+			`OP_DEC: begin // DCR (B)
 				out_flag_neg <= 1'b1;
 				out_flag_carry <= in_flag_carry;
 				out_flag_aux_carry <= w_aux_carry;
@@ -206,7 +206,7 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 					out_flag_zero <= 1'b0;
 				end
 			end
-			`OP_CCF: begin // CMC Complement carry flag (CY -> 'CY) 
+			`OP_CCF: begin // CMC Complement carry flag (CY -> 'CY)
 				out_flag_aux_carry <= 1'b0;
 				out_flag_carry <= ~in_flag_carry;
 				out_flag_neg <= 1'b0;
@@ -218,31 +218,31 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 				out_flag_aux_carry <= 1'b1;
 				out_flag_zero <= in_flag_zero;
 			end
-			`OP_SCF: begin // STC Set Carry flag (CY = 1) 
+			`OP_SCF: begin // STC Set Carry flag (CY = 1)
 				out_flag_carry <= 1'b1;
 				out_flag_aux_carry <= 1'b0;
 				out_flag_neg <= 1'b0;
 				out_flag_zero <= in_flag_zero;
 			end
 		endcase
-	end 
-	
+	end
+
 
 	// Data Path (operation execution)
 	always @ (in_op, in_oper_a, in_oper_b, in_flag_carry, in_flag_aux_carry) begin : alu_process
-		
+
 		out_result = {DATA_SIZE{1'b0}};
 
 		casex (in_op)
 			`OP_ADD: begin// ADD
 				Add(in_oper_a, in_oper_b, 1'b0, out_result, w_aux_carry, w_carry);
-			end 
+			end
 			`OP_ADDC: begin// ADD carry (A+B+Carry)
 				Add(in_oper_a, in_oper_b, in_flag_carry, out_result, w_aux_carry, w_carry);
 			end
 			`OP_SUB: begin// SUB
 				Add(in_oper_a, (-in_oper_b), 1'b0, out_result, w_aux_carry, w_carry);
-			end 
+			end
 			`OP_SUBC: begin// SUB Carry (A - (B + Carry))
 				Add(in_oper_a, -(in_oper_b + in_flag_carry), 1'b0, out_result, w_aux_carry, w_carry);
 			end
@@ -252,7 +252,7 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 				out_result = (in_oper_a ^ in_oper_b);
 			`OP_OR: // OR
 				out_result = (in_oper_a | in_oper_b);
-			`OP_CP: begin // CP compare (A) - r 
+			`OP_CP: begin // CP compare (A) - r
 				Add(in_oper_a, (-in_oper_b), 1'b0, out_result, w_aux_carry, w_carry);
 			end
 			`OP_INC: begin // INC (B)
@@ -269,23 +269,23 @@ module Sharp_LR35902_alu #(parameter DATA_SIZE = 8)(
 				out_result = {in_oper_a[6:0],in_flag_carry};
 			`OP_RRA: // RRA rotate accumulator (A) right throught carry
 				out_result = {in_flag_carry,in_oper_a[7:1]};
-			`OP_DAA: begin : DAA // DAA decimal ajust accumulator (A) 
+			`OP_DAA: begin : DAA // DAA decimal ajust accumulator (A)
 					// Label DDA to enable varibale declaration
 
 					// DAA op (op 1 bit extended)
-					reg [(DATA_SIZE/2):0] high, low; 
+					reg [(DATA_SIZE/2):0] high, low;
 
 					low = in_oper_a[3:0];
 					high = in_oper_a[7:4];
 
-					if(in_flag_aux_carry || low > 9 ) 
+					if(in_flag_aux_carry || low > 9 )
 						low = low + 6;
 
 					high = high + low[4];
-					
-					if(in_flag_carry || high > 9) 
+
+					if(in_flag_carry || high > 9)
 						high = high + 6;
-					
+
 					w_aux_carry = low[4];
 					w_carry = high[4];
 					out_result = {high[3:0], low[3:0]};

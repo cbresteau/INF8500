@@ -21,7 +21,7 @@ program automatic TestProgram(Interface_to_alu alu_interface);
 	// Module scoreboard
 	// Module Receiver
 	Driver     	drvr;		//  Module driver
-	TestPacketQueue in_box; //Mod ici 
+	TestPacketQueue in_box; //Mod ici
 
 	initial begin
 
@@ -29,6 +29,7 @@ program automatic TestProgram(Interface_to_alu alu_interface);
       	// Generator
       	// Receiver
       	// Scoreboard
+			in_box = new(); // Mod ici 
   		drvr = new("drvr[0]", alu_interface, in_box); // MOD ici
 
 		$display ($time, "[START] Test starts.");

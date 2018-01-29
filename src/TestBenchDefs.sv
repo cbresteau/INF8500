@@ -52,7 +52,7 @@ package pkg_testbench_defs;
 	class TestPacket;
 		string 					name;
 
-		reg [7 : 0]					op;
+		AluOperation 	op;
 		reg [DATA_SIZE-1 : 0] 		operand_a;
 		reg [DATA_SIZE-1 : 0] 		operand_b;
 		reg 						flag_carry;
@@ -63,7 +63,7 @@ package pkg_testbench_defs;
 		function new(string name = "TestPacket");
 
 			this.name = name;
-			this.op = enum_to_op(op);
+			this.op = op_add;
 			this.operand_a =  $urandom_range(255,0);
 			this.operand_b = $urandom_range(255,0);
 
