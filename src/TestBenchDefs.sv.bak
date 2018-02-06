@@ -89,6 +89,7 @@ package pkg_testbench_defs;
 			this.name = name;
 			this.op = op;
 			this.result = result;
+
 			this.flag_carry =  flag_carry;
 			this.flag_zero = flag_zero;
 			this.flag_neg =  flag_neg;

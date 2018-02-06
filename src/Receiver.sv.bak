@@ -51,7 +51,7 @@ task Receiver::start();
 	alu_interface.read_op_result(result, out_flag_carry, out_flag_zero, out_flag_neg, out_flag_aux_carry);
 	// MOD ICI same as driver
 
-	ResultPacket out_mail = new("out_mail", this.alu_interface.out_op, this.alu_interface.out_result, this.alu_interface.out_flag_carry, this.alu_interface.out_flag_zero, this.alu_interface.out_flag_neg, this.alu_interface.out_flag_aux_carry);
+	ResultPacket out_mail = new(name = "ResultPacket", this.alu_interface.out_op, this.alu_interface.out_result, this.alu_interface.out_flag_carry, this.alu_interface.out_flag_zero, this.alu_interface.out_flag_neg, this.alu_interface.out_flag_aux_carry);
 
 	$display ($time, " [RECEIVER] Task finished");
 endtask

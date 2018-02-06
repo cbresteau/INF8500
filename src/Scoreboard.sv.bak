@@ -51,8 +51,7 @@ task Scoreboard::goldenModel(); // a verifier
 	// Récupère les opérations telles quelles de l'UAL ou non ?? exemple pour ADD ??
 	case(this.test.op) // pas le bon "op"
 		op_add: this.test.op = this.mail_driver.operand_a + this.mail_driver.operand_b;// TODO Faire proporement
-		op_add_c: {
-			if (this.mail_driver.flag_carry){
+		op_add_c: {if (this.mail_driver.flag_carry){
 				this.test.op = this.mail_driver.operand_a + this.mail_driver.operand_b;
 			}
 			else{
