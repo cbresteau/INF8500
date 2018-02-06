@@ -1,0 +1,93 @@
+C:/TEMP/INF8500/Generator.sv {1 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/Generator.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling package pkg_alu_generator
+-- Importing package pkg_testbench_defs
+
+Top level modules:
+	--none--
+
+} {} {}} C:/TEMP/INF8500/Monitor.sv {1 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/Monitor.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling module Monitor
+
+Top level modules:
+	Monitor
+
+} {} {}} C:/TEMP/INF8500/Sharp_LR35902_alu_opcodes.v {1 {vlog -work work -vopt -stats=none C:/TEMP/INF8500/Sharp_LR35902_alu_opcodes.v
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+
+} {} {}} C:/TEMP/INF8500/TestProgram.sv {0 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/TestProgram.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling package TestProgram_sv_unit
+-- Importing package pkg_testbench_defs
+-- Importing package pkg_alu_driver
+-- Compiling program TestProgram
+** Error: C:/TEMP/INF8500/TestProgram.sv(27): 'Receiver' is an unknown type.
+Or did you omit the '()' for an instantiation?
+** Error: C:/TEMP/INF8500/TestProgram.sv(28): 'Generator' is an unknown type.
+Or did you omit the '()' for an instantiation?
+** Error: C:/TEMP/INF8500/TestProgram.sv(29): 'Scoreboard' is an unknown type.
+Or did you omit the '()' for an instantiation?
+** Error: C:/TEMP/INF8500/TestProgram.sv(40): (vlog-2110) Illegal reference to net "rcvr".
+** Error: C:/TEMP/INF8500/TestProgram.sv(40): 'new' must be used to assign to a class or covergroup handle.
+** Error: C:/TEMP/INF8500/TestProgram.sv(41): 'gen' is not a variable
+** Error: C:/TEMP/INF8500/TestProgram.sv(41): Illegal LHS of assignment.
+** Error: C:/TEMP/INF8500/TestProgram.sv(41): 'new' must be used to assign to a class or covergroup handle.
+** Error: C:/TEMP/INF8500/TestProgram.sv(57): Questa has encountered an unexpected internal error: ../../src/vlog/vresolve.c(527). Please contact Questa support at http://supportnet.mentor.com/
+** Error: C:/TEMP/INF8500/TestProgram.sv(42): 'board' is not a variable
+** Error: C:/TEMP/INF8500/TestProgram.sv(42): Illegal LHS of assignment.
+** Error: C:/TEMP/INF8500/TestProgram.sv(42): 'new' must be used to assign to a class or covergroup handle.
+** Error: C:/TEMP/INF8500/TestProgram.sv(57): Questa has encountered an unexpected internal error: ../../src/vlog/vresolve.c(527). Please contact Questa support at http://supportnet.mentor.com/
+
+} {7.0 8.0 9.0 10.0 11.0 12.0 13.0 23.0} {}} C:/TEMP/INF8500/Interface_to_alu.sv {1 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/Interface_to_alu.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling interface Interface_to_alu
+-- Importing package pkg_testbench_defs
+
+Top level modules:
+	--none--
+
+} {} {}} C:/TEMP/INF8500/Scoreboard.sv {0 vlog\ -work\ work\ -vopt\ -sv\ -stats=none\ C:/TEMP/INF8500/Scoreboard.sv\nQuestaSim-64\ vlog\ 10.5c\ Compiler\ 2016.07\ Jul\ 21\ 2016\n--\ Compiling\ package\ pkg_alu_scoreboard\n--\ Importing\ package\ pkg_testbench_defs\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(98):\ near\ \"if\":\ syntax\ error,\ unexpected\ if,\ expecting\ '\;'.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(114):\ near\ \"if\":\ syntax\ error,\ unexpected\ if.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(118):\ near\ \"\}\":\ syntax\ error,\ unexpected\ '\}'.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(137):\ near\ \"<<<\":\ syntax\ error,\ unexpected\ <<\ or\ <<<.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(138):\ near\ \".\":\ syntax\ error,\ unexpected\ '.',\ expecting\ '\\''.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(140):\ near\ \"else\":\ syntax\ error,\ unexpected\ else.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(142):\ near\ \".\":\ syntax\ error,\ unexpected\ '.',\ expecting\ '\\''.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(147):\ near\ \"if\":\ syntax\ error,\ unexpected\ if.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(149):\ near\ \"=\":\ syntax\ error,\ unexpected\ '=',\ expecting\ ++\ or\ --.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(151):\ near\ \"\}\":\ syntax\ error,\ unexpected\ '\}'.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(154):\ near\ \".\":\ syntax\ error,\ unexpected\ '.',\ expecting\ '\\''.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(156):\ near\ \"\}\":\ syntax\ error,\ unexpected\ '\}'.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(160):\ near\ \"=\":\ syntax\ error,\ unexpected\ '=',\ expecting\ ++\ or\ --.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(163):\ near\ \"=\":\ syntax\ error,\ unexpected\ '=',\ expecting\ ++\ or\ --.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(165):\ near\ \"\}\":\ syntax\ error,\ unexpected\ '\}'.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(166):\ near\ \"=\":\ syntax\ error,\ unexpected\ '=',\ expecting\ ++\ or\ --.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(169):\ near\ \"\}\":\ syntax\ error,\ unexpected\ '\}'.\n**\ Error:\ (vlog-13069)\ C:/TEMP/INF8500/Scoreboard.sv(189):\ near\ \"\$error\":\ syntax\ error,\ unexpected\ SYSTEM_IDENTIFIER,\ expecting\ '('.\n\n {5.0 23.0} {}} C:/TEMP/INF8500/aluTOP.sv {1 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/aluTOP.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling module aluTOP
+
+Top level modules:
+	aluTOP
+
+} {} {}} C:/TEMP/INF8500/Receiver.sv {0 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/Receiver.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling package pkg_alu_receiver
+-- Importing package pkg_testbench_defs
+** Error: C:/TEMP/INF8500/Receiver.sv(56): Illegal declaration after the statement near line '51'.  Declarations must precede statements.  Look for stray semicolons.
+
+} {5.0 6.0} {}} C:/TEMP/INF8500/TestBenchDefs.sv {1 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/TestBenchDefs.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling package pkg_testbench_defs
+
+Top level modules:
+	--none--
+
+} {} {}} C:/TEMP/INF8500/TestBenchTOP.sv {1 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/TestBenchTOP.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling module TestBenchTOP
+-- Importing package pkg_testbench_defs
+
+Top level modules:
+	TestBenchTOP
+
+} {} {}} C:/TEMP/INF8500/Sharp_LR35902_alu.v {1 {vlog -work work -vopt -stats=none C:/TEMP/INF8500/Sharp_LR35902_alu.v
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling module Sharp_LR35902_alu
+
+Top level modules:
+	Sharp_LR35902_alu
+
+} {} {}} C:/TEMP/INF8500/Driver.sv {1 {vlog -work work -vopt -sv -stats=none C:/TEMP/INF8500/Driver.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+-- Compiling package pkg_alu_driver
+-- Importing package pkg_testbench_defs
+
+Top level modules:
+	--none--
+
+} {} {}}

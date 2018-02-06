@@ -27,6 +27,6 @@ vsim -t ns work.TestBenchTOP
 add wave -r *
 
 # Execution du banc de test pour 14 cycle d'horloge (14 * 200ns)
-run 2800ns
+run -all
 
 #coverage report -detail -cvg -file rapport.txt

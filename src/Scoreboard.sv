@@ -50,101 +50,130 @@ task Scoreboard::goldenModel(); // a verifier
 
 	// Récupère les opérations telles quelles de l'UAL ou non ?? exemple pour ADD ??
 	case(this.test.op) // pas le bon "op"
-		op_add: this.test.op = this.mail_driver.operand_a + this.mail_driver.operand_b;// TODO Faire proporement
-		op_add_c: {
-			if (this.mail_driver.flag_carry){
+		op_add: begin
+			this.test.op = this.mail_driver.operand_a + this.mail_driver.operand_b;// TODO Faire proporement
+		end		
+
+		op_add_c: begin 
+			if (this.mail_driver.flag_carry)
 				this.test.op = this.mail_driver.operand_a + this.mail_driver.operand_b;
-			}
-			else{
-								 this.test.op = 0;
-							 } break;}
-		op_sub: this.test.op = this.mail_driver.operand_a - this.mail_driver.operand_b;
-		op_sub_c: if (this.mail_driver.flag_carry){
-								this.test.op = this.mail_driver.operand_a - this.mail_driver.operand_b;
-						 }
-							else{
-								 this.test.op = 0;
-							 };
-		op_and: this.test.op = this.mail_driver.operand_a & this.mail_driver.operand_b;
-						 this.test.flag_carry = 0;
-						 this.test.flag_neg = 0;
-						 this.test.flag_aux_carry = 1;
-					 ;
-		op_xor: {this.test.op = this.mail_driver.operand_a ^ this.mail_driver.operand_b;
-						 this.test.flag_carry = 0;
-						 this.test.flag_neg = 0;
-						 this.test.flag_aux_carry = 0;
-					 };
-		op_or: {this.test.op = this.mail_driver.operand_a | this.mail_driver.operand_b;
-						 this.test.flag_carry = 0;
-						 this.test.flag_neg = 0;
-						 this.test.flag_aux_carry = 0;
-					 };
-		op_cp: { this.test.op =  this.mail_driver.operand_a - this.mail_driver.operand_b
-			if(this.test.op == 0){
-				this.test.flag_zero = 1;
-			}
-			else if ( this.test.op < 0 ){
-				this.test.flag_neg = 1;
-			}
-		};
-		op_inc: this.test.op = this.mail_driver.operand_b + 1;
-		op_dec: this.test.op = this.mail_driver.operand_b - 1;
-		op_daa: this.test.op = {if(this.mail_driver.flag_aux_carry == 1 || this.mail_driver.operand_a[3:0] > 9){
-			this.test.flag_carry = 1;
-			this.mail_driver.operand_a[3:0] = this.mail_driver.operand_a[3:0] + 6;
-			this.mail_driver.operand_a[7:4] = this.mail_driver.operand_a[7:4] + 1;
-			}
-			if(this.mail_driver.flag_carry == 1 || this.mail_driver.operand_a[7:4] > 9){
-				this.mail_driver.operand_a[7:4] = this.mail_driver.operand_a[7:4] + 6;
-			}
+			else
+				this.test.op = 0;
+		end
+
+		op_sub: begin 
+			this.test.op = this.mail_driver.operand_a - this.mail_driver.operand_b;
+		end
+
+		op_sub_c: begin
+			if (this.mail_driver.flag_carry)
+				this.test.op = this.mail_driver.operand_a - this.mail_driver.operand_b;
+			else
+				this.test.op = 0;
+		end
+
+		op_and: begin 
+			this.test.op = this.mail_driver.operand_a & this.mail_driver.operand_b;
+			this.test.flag_carry = 0;
+			this.test.flag_neg = 0;
+			this.test.flag_aux_carry = 1;
+		end
+
+		op_xor: begin
+			this.test.op = this.mail_driver.operand_a ^ this.mail_driver.operand_b;
+			this.test.flag_carry = 0;
+			this.test.flag_neg = 0;
 			this.test.flag_aux_carry = 0;
-		};
-		op_rlca: {
+		end
+
+		op_or: begin
+			this.test.op = this.mail_driver.operand_a | this.mail_driver.operand_b;
+			this.test.flag_carry = 0;
+			this.test.flag_neg = 0;
+			this.test.flag_aux_carry = 0;
+		end
+
+		op_cp: begin
+			this.test.op =  this.mail_driver.operand_a - this.mail_driver.operand_b;
+			if(this.test.op == 0)
+				this.test.flag_zero = 1;
+			else if ( this.test.op < 0 )
+				this.test.flag_neg = 1;
+		end
+
+		op_inc: begin 
+			this.test.op = this.mail_driver.operand_b + 1;
+		end
+
+		op_dec: begin
+			this.test.op = this.mail_driver.operand_b - 1;
+		end
+
+		op_daa: begin
+			if(this.mail_driver.flag_aux_carry == 1 || this.mail_driver.operand_a[3:0] > 9)
+				this.test.flag_carry = 1;
+				this.mail_driver.operand_a[3:0] = this.mail_driver.operand_a[3:0] + 6;
+				this.mail_driver.operand_a[7:4] = this.mail_driver.operand_a[7:4] + 1;
+			if(this.mail_driver.flag_carry == 1 || this.mail_driver.operand_a[7:4] > 9)
+				this.mail_driver.operand_a[7:4] = this.mail_driver.operand_a[7:4] + 6;
+			this.test.flag_aux_carry = 0;
+		end
+
+		op_rlca: begin
 			this.test.flag_carry = this.mail_driver.operand_a[7];
 			this.test.op = this.mail_driver.operand_a <<< 1;
-		};
-		op_rrca: {
+		end
+
+		op_rrca: begin
 			this.test.flag_carry = this.mail_driver.operand_a[0];
 			this.test.op = this.mail_driver.operand_a >>> 1;
-		};
-		op_rla: {
-			if(this.mail_driver.operand_a[7] == 0){
-			this.mail_driver.operand_a <<< 1;
-			this.mail_driver.operand_a[0] = TestResultQueue.flag_carry;
-			this.test.flag_carry = 0 ;
-		}
-		else{
-			this.mail_driver.operand_a <<< 1;
-			this.mail_driver.operand_a[0] = TestResultQueue.flag_carry;
-			this.test.flag_carry = 1 ;
-		}
-		this.test.op = this.mail_driver.operand_a;
-		};
-		op_rra: {
-			if(this.mail_driver.operand_a[0] == 0){
-			this.mail_driver.operand_a >>> 1;
-			this.mail_driver.operand_a[7] = TestResultQueue.flag_carry;
-			this.test.flag_carry = 0 ;
-		}
-		else{
-			this.mail_driver.operand_a >>> 1;
-			this.mail_driver.operand_a[7] = TestResultQueue.flag_carry;
-			this.test.flag_carry = 1 ;
-		}
-		this.test.op = this.mail_driver.operand_a;
-		};
-		op_cpl: {
+		end
+
+		op_rla: begin
+			if(this.mail_driver.operand_a[7] == 0)
+				begin
+					this.mail_driver.operand_a = this.mail_driver.operand_a <<< 1;
+					this.mail_driver.operand_a[0] = this.mail_driver.flag_carry;
+					this.test.flag_carry = 0 ;
+				end
+			else
+				begin
+					this.mail_driver.operand_a = this.mail_driver.operand_a <<< 1;
+					this.mail_driver.operand_a[0] = this.mail_driver.flag_carry;
+					this.test.flag_carry = 1 ;		
+				end
+			this.test.op = this.mail_driver.operand_a;
+		end
+		op_rra: begin
+			if(this.mail_driver.operand_a[0] == 0)
+				begin
+					this.mail_driver.operand_a = this.mail_driver.operand_a >>> 1;
+					this.mail_driver.operand_a[7] = this.mail_driver.flag_carry;
+					this.test.flag_carry = 0 ;
+				end
+			else
+				begin
+					this.mail_driver.operand_a = this.mail_driver.operand_a >>> 1;
+					this.mail_driver.operand_a[7] = this.mail_driver.flag_carry;
+					this.test.flag_carry = 1 ;
+				end
+			this.test.op = this.mail_driver.operand_a;
+		end
+
+		op_cpl: begin
 			this.test.op = ~this.mail_driver.operand_a;
-			// Erreur énoncé dans le carry flag qui reste id.
-		};
-		op_ccf: {this.test.op = ~this.mail_driver.flag_carry;
+			// Erreur enonce dans le carry flag qui reste id.
+		end
+		op_ccf: begin
+			this.test.op = ~this.mail_driver.flag_carry;
 			this.test.flagcarry = ~this.mail_driver.flag_carry;
-		};
-		op_scf:{this.test.op = ~this.mail_driver.operand_a;
+		end
+
+		op_scf: begin
+			this.test.op = ~this.mail_driver.operand_a;
 			this.test.flagcarry = 1;
 			// Sortie pas importante seul le carry_flag importe
-		};
+		end
 	endcase
 
 return this.test.op;
@@ -155,20 +184,20 @@ endtask : goldenModel;
 task Scoreboard::check();
 
 
-	$display($time, "[SCOREBOARD -> CHECKROUTINE] OP: %s, OPERA: %b, OPERB: %b, CARRY %b, ZERO %b, NEG %b, AUX CARRY %b", test_op, test_operand_a, test_operand_b,
-		test_flag_carry, test_flag_zero, test_flag_neg, test_flag_aux_carry );
-	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed result: %b, received result: %b", computed_result, received_result );
-	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_carry: %b, received flag_carry: %b", computed_flag_carry, received_flag_carry );
-	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_zero: %b, received flag_zero: %b", computed_flag_zero, received_flag_zero );
-	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_sub: %b, received flag_sub: %b", computed_flag_sub, received_flag_sub );
-	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_aux_carry: %b, received flag_aux_carry: %b", computed_flag_aux_carry, received_flag_aux_carry );
+	$display($time, "[SCOREBOARD -> CHECKROUTINE] OP: %s, OPERA: %b, OPERB: %b, CARRY %b, ZERO %b, NEG %b, AUX CARRY %b", this.test.op, this.test.operand_a, this.test.operand_b,
+		this.test.flag_carry, this.test.flag_zero, this.test.flag_neg, this.test.flag_aux_carry );
+	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed result: %b, received result: %b", this.test.op , this.mail_receiver.op );
+	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_carry: %b, received flag_carry: %b", this.test.flag_carry, this.mail_receiver.flag_carry );
+	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_zero: %b, received flag_zero: %b", this.test.flag_zero, this.mail_receiver.flag_zero );
+	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_sub: %b, received flag_sub: %b", this.test.flag_sub, this.mail_receiver.flag_sub );
+	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_aux_carry: %b, received flag_aux_carry: %b", this.test.flag_aux_carry, this.mail_receiver.flag_aux_carry );
 
 	 Si erreur
-	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, result received: %b .Expected %b", received_result, computed_result  );
-	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_carry received: %b .Expected %b", received_flag_carry, computed_flag_carry );
-	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_zero received: %b .Expected %b", received_flag_zero, computed_flag_zero);
-	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_sub received:  %b .Expected %b", received_flag_sub, computed_flag_sub );
-	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_aux_carry received: %b .Expected %b", received_flag_aux_carry, computed_flag_aux_carry );
+	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, result received: %b .Expected %b", this.mail_receiver.op, this.test.op  );
+	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_carry received: %b .Expected %b", this.mail_receiver.flag_carry, this.test.flag_carry );
+	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_zero received: %b .Expected %b", this.mail_receiver.flag_zero, this.test.flag_zero);
+	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_sub received:  %b .Expected %b", this.mail_receiver.flag_sub, this.test.flag_sub );
+	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_aux_carry received: %b .Expected %b", this.mail_receiver.flag_aux_carry, this.test.flag_aux_carry );
 
 endtask
 

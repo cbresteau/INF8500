@@ -17,9 +17,9 @@ import pkg_alu_driver::*;
 program automatic TestProgram(Interface_to_alu alu_interface);
 
 	// Déclaration des diver modules du testbench ici
-//	Module generator;
-//	Module scoreboard;
-//	Module Receiver;
+	Module generator;
+	Module scoreboard;
+	Module Receiver;
 
 	TestPacketQueue mail1 = new();
 	mailbox #(TestPacket) mail2 = new();
