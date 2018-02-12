@@ -13,6 +13,9 @@
 //=======================================================================================
 import pkg_testbench_defs::*;
 import pkg_alu_driver::*;
+import pkg_alu_generator::*;
+import pkg_alu_scoreboard::*;
+import pkg_alu_receiver::*;
 
 program automatic TestProgram(Interface_to_alu alu_interface);
 
