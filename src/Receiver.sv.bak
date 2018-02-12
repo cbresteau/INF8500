@@ -26,6 +26,7 @@ class Receiver;
 			string   				name;
 
 			TestResultQueue result_mailbox;
+			ResultPacket result_pkt; 
 
    	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue result_mailbox);
    	extern task 	start();
@@ -35,7 +36,8 @@ endclass
 function Receiver::new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue result_mailbox);
 	this.name = name;
 	this.alu_interface = alu_interface;
-	this.result_mailbox = result_mailbox ; // Mod ici
+	this.result_mailbox = result_mailbox ;
+	this.result_pkt = result_mailbox.get();
 
 	// ### À compléter ###
 
@@ -48,7 +50,7 @@ task Receiver::start();
 	this.alu_interface.wait_clk(1);
 
 	// Read result
-	// this.alu_interface.read_op_result(result, out_flag_carry, out_flag_zero, out_flag_neg, out_flag_aux_carry);
+	this.alu_interface.read_op_result(result_pkt.result, result_pkt.flag_carry, result_pkt.flag_zero, result_pkt.flag_neg, result_pkt.flag_aux_carry);
 	// MOD ICI same as driver
 
 	ResultPacket out_mail = new("out_mail", this.alu_interface.out_op, this.alu_interface.out_result, this.alu_interface.out_flag_carry, this.alu_interface.out_flag_zero, this.alu_interface.out_flag_neg, this.alu_interface.out_flag_aux_carry);

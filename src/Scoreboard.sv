@@ -25,11 +25,11 @@ class Scoreboard;
 	// test 		: sortie du calcul du goldenModel
 	// test_mail_driver 		: entree du goldenModel et sert pour les calculs pour test
 	// mail_receiver	: entree a comparer avec les valeurs de test
-	TestPacketQueue mail_driver;
-	TestResultQueue mail_receiver;
+	// TestPacketQueue mail_driver;
+	// TestResultQueue mail_receiver;
 	TestPacket test_mail_driver;
 	ResultPacket	test_mail_receiver;
-	TestPacket test;
+	ResultPacket test;
 
 	extern function new(string name = "Scoreboard", TestPacketQueue mail_driver, TestResultQueue mail_receiver);//Mod ici
 	extern task start();
@@ -43,7 +43,9 @@ function Scoreboard::new(string name = "Scoreboard", TestPacketQueue mail_driver
 	// this.mail_receiver = mail_receiver;
 	this.test_mail_driver = mail_driver.get();
 	this.test_mail_receiver = mail_receiver.get();
-	this.test = new();
+// il faut instencier test d'une certaine maniere
+//	this.test = new("test", this.test_mail_driver.op, this.test_mail_driver.result, this.test_mail_driver.flag_carry, this.test_mail_driver.flag_zero, this.test_mail_driver.flag_neg, this.test_mail_driver.flag_aux_carry);
+
 endfunction
 
 covergroup cover_group;
@@ -59,8 +61,8 @@ covergroup cover_group;
 		bins binOP_inc 		= op_inc;
 		bins binOP_dec 		= op_dec;
 		bins binOP_daa 		= op_daa;
-		bins binOP_rlca 	=	op_rlca;
-		bins binOP_rrca 	=	op_rrca;
+		bins binOP_rlca 	= op_rlca;
+		bins binOP_rrca 	= op_rrca;
 		bins binOP_rla 		= op_rla;
 		bins binOP_rra 		= op_rra;
 		bins binOP_cpl 		= op_cpl;
@@ -104,13 +106,15 @@ covergroup cover_group;
 		bins AC_1 = {1};
 	}
 
-	crossADD: cross cov_OP,cov_OPA,cov_OPB
-		{binsof(cov_OP.binOP_add) && binsof(cov_OPA) && binsof(cov_OPB);}
+	crossADD: cross cov_OP,cov_OPA,cov_OPB{
+		ignore_bins c_add = ! binsof(cov_OP.binOP_add) intersect{cov_OPA, cov_OPB};
+	}
 
-	crossADDC: cross cov_OP,cov_OPA,cov_OPB,cov_flagC
-		{binsof(cov_OP.binOP_add) && binsof(cov_OPA) && binsof(cov_OPB) && binsof(cov_flagC);}
+	//crossADDC: cross cov_OP,cov_OPA,cov_OPB,cov_flagC{
+	//	binsof(cov_OP.binOP_add) && binsof(cov_OPA) && binsof(cov_OPB) && binsof(cov_flagC);
+	//}
 
-
+endgroup 
 
 task Scoreboard::start();
 
@@ -265,14 +269,14 @@ task Scoreboard::check();
 	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed result: %b, received result: %b", this.test.op , this.test_mail_receiver.op );
 	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_carry: %b, received flag_carry: %b", this.test.flag_carry, this.test_mail_receiver.flag_carry );
 	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_zero: %b, received flag_zero: %b", this.test.flag_zero, this.test_mail_receiver.flag_zero );
-	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_sub: %b, received flag_sub: %b", this.test.flag_sub, this.test_mail_receiver.flag_sub );
+	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_neg: %b, received flag_neg: %b", this.test.flag_neg, this.test_mail_receiver.flag_neg );
 	$display($time, "[SCOREBOARD -> CHECKROUTINE] Computed flag_aux_carry: %b, received flag_aux_carry: %b", this.test.flag_aux_carry, this.test_mail_receiver.flag_aux_carry );
 
 	 //Si erreur
 	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, result received: %b .Expected %b", this.test_mail_receiver.op, this.test.op  );
 	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_carry received: %b .Expected %b", this.test_mail_receiver.flag_carry, this.test.flag_carry );
 	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_zero received: %b .Expected %b", this.test_mail_receiver.flag_zero, this.test.flag_zero);
-	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_sub received:  %b .Expected %b", this.test_mail_receiver.flag_sub, this.test.flag_sub );
+	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_sub received:  %b .Expected %b", this.test_mail_receiver.flag_neg, this.test.flag_neg );
 	$error($time, "[SCOREBOARD -> CHECKROUTINE] Check failed, flag_aux_carry received: %b .Expected %b", this.test_mail_receiver.flag_aux_carry, this.test.flag_aux_carry );
 
 endtask
