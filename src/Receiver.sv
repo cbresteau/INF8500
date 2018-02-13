@@ -25,20 +25,19 @@ class Receiver;
 			// unique identifier
 			string   				name;
 
-			TestResultQueue result_mailbox;
-			ResultPacket result_pkt; 
+			TestResultQueue out_box;
+			ResultPacket result_pkt;
 
-   	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue result_mailbox);
+   	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue out_box);
    	extern task 	start();
 
 endclass
 
-function Receiver::new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue result_mailbox);
+function Receiver::new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue out_box);
 	this.name = name;
 	this.alu_interface = alu_interface;
-	this.result_mailbox = result_mailbox ;
-	this.result_pkt = result_mailbox.get();
-
+	this.out_box.put(out_box) ;
+	this.result_pkt = out_box.get(1);
 	// ### À compléter ###
 
 endfunction

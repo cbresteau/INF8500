@@ -41,8 +41,8 @@ function Scoreboard::new(string name = "Scoreboard", TestPacketQueue mail_driver
 	this.name =  name;
 	// this.mail_driver = mail_driver;
 	// this.mail_receiver = mail_receiver;
-	this.test_mail_driver = mail_driver.get();
-	this.test_mail_receiver = mail_receiver.get();
+	this.test_mail_driver = mail_driver.get(1);
+	this.test_mail_receiver = mail_receiver.get(1);
 // il faut instencier test d'une certaine maniere
 //	this.test = new("test", this.test_mail_driver.op, this.test_mail_driver.result, this.test_mail_driver.flag_carry, this.test_mail_driver.flag_zero, this.test_mail_driver.flag_neg, this.test_mail_driver.flag_aux_carry);
 
@@ -114,7 +114,7 @@ covergroup cover_group;
 	//	binsof(cov_OP.binOP_add) && binsof(cov_OPA) && binsof(cov_OPB) && binsof(cov_flagC);
 	//}
 
-endgroup 
+endgroup
 
 task Scoreboard::start();
 

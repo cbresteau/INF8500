@@ -29,7 +29,7 @@ endclass
 
 function Generator::new(string name = "Generator", TestPacketQueue out_mail);
 	this.name = name;
-	this.out_mail = out_mail;
+	this.out_mail.put(out_mail);
 endfunction
 
 
