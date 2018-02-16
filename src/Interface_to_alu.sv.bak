@@ -12,8 +12,6 @@
 // DATE AUTHOR PROJECT REVISION COMMENTS
 //=======================================================================================
 
-
-// Class du charge de lab, ON TOUCHE PAS
 interface Interface_to_alu(input bit clock);
 	import pkg_testbench_defs::*;
 

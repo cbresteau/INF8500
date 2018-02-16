@@ -37,7 +37,7 @@ task Generator::start();
 
 
 	$display(" Random Generation Started");
-	// Il faut ajouter la generation aleatoire des pacquets de tests ici 
+
 
 endtask
 

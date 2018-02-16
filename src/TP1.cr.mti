@@ -1,0 +1,150 @@
+C:/TEMP/src/Interface_to_alu.sv {1 {vlog -work work -vopt -sv C:/TEMP/src/Interface_to_alu.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:12 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt -sv C:/TEMP/src/Interface_to_alu.sv 
+-- Compiling interface Interface_to_alu
+-- Importing package pkg_testbench_defs
+
+Top level modules:
+	--none--
+End time: 10:28:12 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/TEMP/src/Scoreboard.sv {0 {vlog -work work -vopt -sv C:/TEMP/src/Scoreboard.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:14 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt -sv C:/TEMP/src/Scoreboard.sv 
+-- Compiling package pkg_alu_scoreboard
+-- Importing package pkg_testbench_defs
+** Error: C:/TEMP/src/Scoreboard.sv(47): Field/method name (result) not in 'test_mail_driver'
+** Error: C:/TEMP/src/Scoreboard.sv(269): Field/method name (op) not in 'test_mail_receiver'
+** Error: C:/TEMP/src/Scoreboard.sv(276): Field/method name (op) not in 'test_mail_receiver'
+** Error: C:/TEMP/src/Scoreboard.sv(197): Illegal part-select expression for variable "result"
+** Warning: C:/TEMP/src/Scoreboard.sv(197): (vlog-2697) MSB of part-select into 'result' is out of bounds.
+** Error: C:/TEMP/src/Scoreboard.sv(198): Illegal part-select expression for variable "result"
+** Warning: C:/TEMP/src/Scoreboard.sv(198): (vlog-2697) MSB of part-select into 'result' is out of bounds.
+** Warning: C:/TEMP/src/Scoreboard.sv(198): (vlog-2697) LSB of part-select into 'result' is out of bounds.
+** Error: C:/TEMP/src/Scoreboard.sv(200): Illegal part-select expression for variable "result"
+** Warning: C:/TEMP/src/Scoreboard.sv(200): (vlog-2697) MSB of part-select into 'result' is out of bounds.
+** Warning: C:/TEMP/src/Scoreboard.sv(200): (vlog-2697) LSB of part-select into 'result' is out of bounds.
+** Error (suppressible): (vlog-13198) C:/TEMP/src/Scoreboard.sv(218): Illegal bit-select into scalar variable "result".
+** Error (suppressible): (vlog-13198) C:/TEMP/src/Scoreboard.sv(224): Illegal bit-select into scalar variable "result".
+** Error (suppressible): (vlog-13198) C:/TEMP/src/Scoreboard.sv(232): Illegal bit-select into scalar variable "result".
+** Warning: C:/TEMP/src/Scoreboard.sv(232): (vlog-2576) [BSOB] - Bit-select into 'result' is out of bounds.
+** Error (suppressible): (vlog-13198) C:/TEMP/src/Scoreboard.sv(238): Illegal bit-select into scalar variable "result".
+** Warning: C:/TEMP/src/Scoreboard.sv(238): (vlog-2576) [BSOB] - Bit-select into 'result' is out of bounds.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(52): (vlog-7027) The name ('test_mail_driver.op') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.op'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(72): (vlog-7027) The name ('test_mail_driver.operand_a') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.operand_a'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(82): (vlog-7027) The name ('test_mail_driver.operand_b') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.operand_b'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(92): (vlog-7027) The name ('test_mail_driver.flag_carry') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_carry'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(96): (vlog-7027) The name ('test_mail_driver.flag_neg') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_neg'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(100): (vlog-7027) The name ('test_mail_driver.flag_zero') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_zero'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(104): (vlog-7027) The name ('test_mail_driver.flag_aux_carry') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_aux_carry'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(110): (vlog-7027) The name ('cov_OPA') was not found in the current scope.  Please verify the spelling of the name 'cov_OPA'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(110): (vlog-7027) The name ('cov_OPB') was not found in the current scope.  Please verify the spelling of the name 'cov_OPB'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(104): (vlog-7027) The name ('test_mail_driver.flag_aux_carry') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_aux_carry'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(100): (vlog-7027) The name ('test_mail_driver.flag_zero') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_zero'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(96): (vlog-7027) The name ('test_mail_driver.flag_neg') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_neg'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(92): (vlog-7027) The name ('test_mail_driver.flag_carry') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_carry'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(82): (vlog-7027) The name ('test_mail_driver.operand_b') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.operand_b'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(72): (vlog-7027) The name ('test_mail_driver.operand_a') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.operand_a'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(52): (vlog-7027) The name ('test_mail_driver.op') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.op'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(52): (vlog-7027) The name ('test_mail_driver.op') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.op'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(52): (vlog-7027) The name ('test_mail_driver.op') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.op'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(72): (vlog-7027) The name ('test_mail_driver.operand_a') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.operand_a'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(72): (vlog-7027) The name ('test_mail_driver.operand_a') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.operand_a'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(82): (vlog-7027) The name ('test_mail_driver.operand_b') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.operand_b'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(82): (vlog-7027) The name ('test_mail_driver.operand_b') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.operand_b'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(92): (vlog-7027) The name ('test_mail_driver.flag_carry') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_carry'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(92): (vlog-7027) The name ('test_mail_driver.flag_carry') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_carry'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(96): (vlog-7027) The name ('test_mail_driver.flag_neg') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_neg'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(96): (vlog-7027) The name ('test_mail_driver.flag_neg') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_neg'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(100): (vlog-7027) The name ('test_mail_driver.flag_zero') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_zero'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(100): (vlog-7027) The name ('test_mail_driver.flag_zero') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_zero'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(104): (vlog-7027) The name ('test_mail_driver.flag_aux_carry') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_aux_carry'.
+** Error (suppressible): C:/TEMP/src/Scoreboard.sv(104): (vlog-7027) The name ('test_mail_driver.flag_aux_carry') was not found in the current scope.  Please verify the spelling of the name 'test_mail_driver.flag_aux_carry'.
+End time: 10:28:14 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 40, Warnings: 7
+
+} {7.0 11.0 12.0 13.0 15.0 16.0} {}} C:/TEMP/src/aluTOP.sv {1 {vlog -work work -vopt -sv C:/TEMP/src/aluTOP.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:12 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt -sv C:/TEMP/src/aluTOP.sv 
+-- Compiling module aluTOP
+
+Top level modules:
+	aluTOP
+End time: 10:28:12 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/TEMP/src/Receiver.sv {0 {vlog -work work -vopt -sv C:/TEMP/src/Receiver.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:13 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt -sv C:/TEMP/src/Receiver.sv 
+-- Compiling package pkg_alu_receiver
+-- Importing package pkg_testbench_defs
+** Error: C:/TEMP/src/Receiver.sv(67): Illegal declaration after the statement near line '60'.  Declarations must precede statements.  Look for stray semicolons.
+End time: 10:28:13 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 1, Warnings: 0
+
+} {7.0 8.0} {}} C:/TEMP/src/TestBenchDefs.sv {1 {vlog -work work -vopt -sv C:/TEMP/src/TestBenchDefs.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:13 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt -sv C:/TEMP/src/TestBenchDefs.sv 
+-- Compiling package pkg_testbench_defs
+
+Top level modules:
+	--none--
+End time: 10:28:13 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/TEMP/src/TestBenchTOP.sv {1 {vlog -work work -vopt -sv C:/TEMP/src/TestBenchTOP.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:13 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt -sv C:/TEMP/src/TestBenchTOP.sv 
+-- Compiling module TestBenchTOP
+-- Importing package pkg_testbench_defs
+
+Top level modules:
+	TestBenchTOP
+End time: 10:28:13 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/TEMP/src/Sharp_LR35902_alu.v {1 {vlog -work work -vopt C:/TEMP/src/Sharp_LR35902_alu.v
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:12 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt C:/TEMP/src/Sharp_LR35902_alu.v 
+-- Compiling module Sharp_LR35902_alu
+
+Top level modules:
+	Sharp_LR35902_alu
+End time: 10:28:13 on Feb 15,2018, Elapsed time: 0:00:01
+Errors: 0, Warnings: 0
+
+} {} {}} C:/TEMP/src/Monitor.sv {1 {vlog -work work -vopt -sv C:/TEMP/src/Monitor.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:12 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt -sv C:/TEMP/src/Monitor.sv 
+-- Compiling module Monitor
+
+Top level modules:
+	Monitor
+End time: 10:28:12 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/TEMP/src/Sharp_LR35902_alu_opcodes.v {1 {vlog -work work -vopt C:/TEMP/src/Sharp_LR35902_alu_opcodes.v
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:13 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt C:/TEMP/src/Sharp_LR35902_alu_opcodes.v 
+End time: 10:28:13 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+} {} {}} C:/TEMP/src/TestProgram.sv {0 {vlog -work work -vopt -sv C:/TEMP/src/TestProgram.sv
+QuestaSim-64 vlog 10.5c Compiler 2016.07 Jul 21 2016
+Start time: 10:28:14 on Feb 15,2018
+vlog -reportprogress 300 -work work -vopt -sv C:/TEMP/src/TestProgram.sv 
+** Error: C:/TEMP/src/TestProgram.sv(18): (vlog-13006) Could not find the package (pkg_alu_receiver).  Design read will continue, but expect a cascade of errors after this failure.  Furthermore if you experience a vopt-7 error immediately before this error then please check the package names or the library search paths on the command line.
+End time: 10:28:14 on Feb 15,2018, Elapsed time: 0:00:00
+Errors: 1, Warnings: 0
+
+} {5.0 6.0} {}}

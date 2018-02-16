@@ -77,17 +77,15 @@ package pkg_testbench_defs;
 
 	class ResultPacket;
 		string 				name;
-		reg	 			op;			//pas convaincu que ce soit un reg. A mon avis plutot un AluOperation (Clement L)
-		reg 				result;		
+		reg [DATA_SIZE-1 : 0] 		result;		
 		reg 				flag_carry;
 		reg				flag_zero;
 		reg				flag_neg;
 		reg 				flag_aux_carry;
 
 
-		function new(string name = "ResultPacket", reg op, reg result, reg flag_carry, reg flag_zero, reg flag_neg, reg flag_aux_carry);
+		function new(string name = "ResultPacket", reg result, reg flag_carry, reg flag_zero, reg flag_neg, reg flag_aux_carry);
 			this.name = name;
-			this.op = op;
 			this.result = result;
 			this.flag_carry =  flag_carry;
 			this.flag_zero = flag_zero;

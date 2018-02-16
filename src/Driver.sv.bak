@@ -25,20 +25,19 @@ import pkg_testbench_defs::*;
 class Driver;
 
 	virtual Interface_to_alu 	alu_interface;	// interface signal
- 			string    			name;			// unique identifier
+ 	string    			name;		// unique identifier
 
-			// TODO: Generator mailbox
+	// TODO: Generator mailbox
+	TestPacketQueue in_box; //Mod ici
+	TestPacketQueue out_box;
 
-			TestPacketQueue in_box; //Mod ici
-			TestPacketQueue out_box;
-
-			reg [7 : 0]					op;
-			reg [DATA_SIZE-1 : 0] 		operand_a;
-			reg [DATA_SIZE-1 : 0] 		operand_b;
-			reg 						flag_carry;
-			reg							flag_zero;
-			reg							flag_neg;
-			reg 						flag_aux_carry;
+	reg [7 : 0]			op;
+	reg [DATA_SIZE-1 : 0] 		operand_a;
+	reg [DATA_SIZE-1 : 0] 		operand_b;
+	reg 				flag_carry;
+	reg				flag_zero;
+	reg				flag_neg;
+	reg 				flag_aux_carry;
 
 
 	extern function new(string name = "Driver", virtual Interface_to_alu alu_interface, TestPacketQueue in_box , TestPacketQueue out_box); //Mod ICI
@@ -49,36 +48,45 @@ endclass
 function Driver::new(string name = "Driver",  virtual Interface_to_alu alu_interface, TestPacketQueue in_box, TestPacketQueue out_box );
 	this.name = name;
 	this.alu_interface = alu_interface;
+
+	// On affecte les queues, on travaille sur les paquets dans le start
 	this.in_box = in_box;
-	this.out_box = out_box; // Mod ici
+	this.out_box = out_box;
+	//this.in_box.get(in_box);
+	//this.out_box.put(out_box); // Mod ici
 endfunction
 
 
 task Driver::start();
 
-
 	int packets_sent = 0;
 
 	reg [DATA_SIZE-1 : 0] 		result;
-	reg 						out_flag_carry;
-	reg							out_flag_zero;
-	reg							out_flag_neg;
-	reg 						out_flag_aux_carry;
+	reg 				out_flag_carry;
+	reg				out_flag_zero;
+	reg				out_flag_neg;
+	reg 				out_flag_aux_carry;
+	TestPacket 			test;
 
 	$display ($time, " [DRIVER] Task Started");
 	forever begin
+		// Faire un test sur la taille de la liste de test
 
-		AluOperation op = op_add;
-
+		// Lance le test pour le prochain packet de test
+		test = this.in_box.get(in_box);
+		
+		// MOdifier le test.name test.op (avec le bon format) pour avoir le bon format
 		if(DEBUG_ENABLE) begin
 			$display ($time, " [DRIVER] Sending OP: %s, OPERA: %b, OPERB: %b, CARRY: %b, ZERO: %b, NEG: %b, AUXCARRY: %b",
-				op.name(), this.operand_a, this.operand_b, this.flag_carry, this.flag_zero, this.flag_neg, this.flag_aux_carry);
+				test.name, test.operand_a, test.operand_b, test.flag_carry, test.flag_zero, test.flag_neg, test.flag_aux_carry);
 		end
 
 		// Send payload
-		alu_interface.send_op(this.op, this.operand_a, this.operand_b, this.flag_carry, this.flag_zero, this.flag_neg, this.flag_aux_carry);
-		// Envoie mailbox
-		// Envoyer au Scoreboard out_box (fonction ou paramètres pour le constructeur ??)
+		// MOdifier le test.op pour avoir le bon format
+		alu_interface.send_op(test.op, test.operand_a, test.operand_b, test.flag_carry, test.flag_zero, test.flag_neg, test.flag_aux_carry);
+		
+		// Transfert le cas de test au scoreboard
+		this.out_box.put(test);
 		packets_sent++;
 
 		// Wait for signal to propagate

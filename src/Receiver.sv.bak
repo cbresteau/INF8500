@@ -19,43 +19,65 @@ package pkg_alu_receiver;
 import pkg_testbench_defs::*;
 
 class Receiver;
+	// unique identifier
+	string   				name;
+	
 	// interface signals
 	virtual Interface_to_alu		alu_interface;
+	TestResultQueue 			out_box;
 
-			// unique identifier
-			string   				name;
 
-			TestResultQueue result_mailbox;
-			ResultPacket result_pkt; 
-
-   	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue result_mailbox);
+   	extern function new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue out_box);
    	extern task 	start();
-
 endclass
 
-function Receiver::new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue result_mailbox);
-	this.name = name;
-	this.alu_interface = alu_interface;
-	this.result_mailbox = result_mailbox ;
-	this.result_pkt = result_mailbox.get();
-
-	// ### À compléter ###
+function Receiver::new(string name = "Receiver", virtual Interface_to_alu alu_interface, TestResultQueue out_box);
+	this.name 		= name;
+	this.alu_interface 	= alu_interface;
+	this.out_box 		= out_box;
+	// Pas mettre qqch dans 'this.result_pkt' parce que c'est la sortie de l'interface
 
 endfunction
 
 task Receiver::start();
 
-	$display($time, " [RECEIVER] Task Started");
+	int packets_sent = 0;
 
-	this.alu_interface.wait_clk(1);
+	// Futur parametre du test packet qui va etre ajoute
+	reg [DATA_SIZE-1 : 0] 		result;
+	reg 				out_flag_carry;
+	reg				out_flag_zero;
+	reg				out_flag_neg;
+	reg 				out_flag_aux_carry;
+	ResultPacket 			out_mail;
 
-	// Read result
-	this.alu_interface.read_op_result(result_pkt.result, result_pkt.flag_carry, result_pkt.flag_zero, result_pkt.flag_neg, result_pkt.flag_aux_carry);
-	// MOD ICI same as driver
 
-	ResultPacket out_mail = new("out_mail", this.alu_interface.out_op, this.alu_interface.out_result, this.alu_interface.out_flag_carry, this.alu_interface.out_flag_zero, this.alu_interface.out_flag_neg, this.alu_interface.out_flag_aux_carry);
+	$display ($time, " [RECEIVER] Task Started");
+	forever begin
+		//Comment on sort de la loop ?
 
-	$display ($time, " [RECEIVER] Task finished");
+		// Wait for signal to propagate
+		this.alu_interface.wait_clk(1);
+
+		// Read result
+		this.alu_interface.read_op_result(result, out_flag_carry, out_flag_zero, out_flag_neg, out_flag_aux_carry);
+		// MOD ICI same as driver
+
+		// les OUT de alu_interface sont possiblement pas definit correctement.
+		// voir s'il faut pas plutot utiliser result_pkt
+		
+		out_mail = new("out_mail",result, out_flag_carry, out_flag_zero, out_flag_neg, out_flag_aux_carry);
+		this.out_box.put(out_mail);
+
+		$display($time, " [RECEIVER] RESULT: %b, FLAG_CARRY: %b, FLAG_ZERO: %b, FLAG_SUB: %b, FLAG_AUX_CARRY: %b", result, out_flag_carry, out_flag_zero, out_flag_neg, out_flag_aux_carry);
+
+		if(packets_sent >= 5) begin
+			break; // Exit loop
+		end
+
+	end //forever
+	$display ($time,  " [RECEIVER] Task finished");
+
 endtask
 
 
