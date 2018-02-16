@@ -61,7 +61,7 @@ covergroup cover_group;
 		bins opA32 = {8'b100000};
 		bins opA64 = {8'b1000000};
 		bins opA128 = {8'b10000000};
-		bins opA_al = {8'b?1?????1}; //wildcard ?
+		bins opA_al = {8'b?1?????1}; //wildcard ? Ajout de tests aléatoires comme demandé
 	}
 	cov_OPB: coverpoint this.test_driver.operand_b{
 		bins opB1 = {8'b1};
@@ -92,11 +92,13 @@ covergroup cover_group;
 
 	crossADD: cross cov_OP, cov_OPA, cov_OPB{
 		bins add = binsof(cov_OP.binOP_add);
-		bins ope = binsof(cov_OPA) && binsof(cov_OPB)
+		bins ope = binsof(cov_OPA) && binsof(cov_OPB);
 		//ignore_bins c_add = ! binsof(cov_OP.binOP_add);// intersect{cov_OPA, cov_OPB};
 	}
 
-	crossADDC_1: cross cov_OP, cov_OPA, cov_OPB, cov_flagC{
+	crossADDC: cross cov_OP, cov_OPA, cov_OPB, cov_flagC{
+		bins c_addc1  = binsof(cov_OP.binOP_addc) && binsof(cov_flagC.C_0) && binsof(cov_OPB.opB1);
+		bins
 		//ignore_bins c_addc  = ! binsof(cov_OP.binOP_addc); // Inclure directement les bins qu'on veut tester
 		//ignore_bins c_flag0 =  ! binsof(cov_flagC.C_0);
 		//ignore_bins c_opB   =  ! binsof(cov_OPB.opB1);

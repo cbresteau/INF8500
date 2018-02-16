@@ -17,7 +17,7 @@ program test_uart #(time Tck = 20000ps) (if_to_Uart bfm, bfm2);
    mailbox testR = new();
 
 	covergroup Cg_parity;
-		// coverpoint uart_cfg.parity;
+		.coverpoint uart_cfg.parity;
 	endgroup
 	Cg_parity cg;
    initial begin

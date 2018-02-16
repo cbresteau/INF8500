@@ -27,7 +27,7 @@ program automatic TestProgram(Interface_to_alu alu_interface);
 
 	// Initialisation of the test classes
 	Driver     		drvr;
-	Receiver 		rcvr;
+	Receiver 			rcvr;
 	Generator 		gen;
 	Scoreboard 		board;
 
@@ -44,6 +44,7 @@ program automatic TestProgram(Interface_to_alu alu_interface);
 		board 	= new("board[0]", 	alu_interface, mail2, mail3);
 
 		covergroup cover_group;
+		// a mon avis cest faut
 			coverpoint uart_cfg.parity;
 		endgroup
 
@@ -52,6 +53,9 @@ program automatic TestProgram(Interface_to_alu alu_interface);
 
 		fork : test
       			drvr.start();
+						rcvr.start();
+						gen.start();
+						board.start();
 		join_any;
 		disable test;
 
