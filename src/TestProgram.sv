@@ -33,17 +33,21 @@ program automatic TestProgram(Interface_to_alu alu_interface);
 
 
 	initial begin
-
       	// Instanciation des diver modules du testbench ici
       	// Generator
       	// Receiver
       	// Scoreboard
 
-  		drvr 	= new("drvr[0]",	alu_interface, mail1, mail2); // MOD ici
+		drvr 	= new("drvr[0]",	alu_interface, mail1, mail2);
 		rcvr 	= new("rcrv[0]" , 	alu_interface, mail3);
 		gen 	= new("gen[0]", 	mail1);
 		board 	= new("board[0]", 	alu_interface, mail2, mail3);
 
+		covergroup cover_group;
+			coverpoint uart_cfg.parity;
+		endgroup
+
+		// cg = new ()
 		$display ($time, "[START] Test starts.");
 
 		fork : test
